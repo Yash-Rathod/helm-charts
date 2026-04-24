@@ -60,3 +60,6 @@ volumeMounts: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+serviceMonitor:
+  enabled: true

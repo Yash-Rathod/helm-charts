@@ -1,0 +1,17 @@
+{{- if .Values.serviceMonitor.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "notification-api.fullname" . }}
+  labels:
+    {{- include "notification-api.labels" . | nindent 4 }}
+    release: kps
+spec:
+  selector:
+    matchLabels:
+      {{- include "notification-api.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 30s
+{{- end }}
